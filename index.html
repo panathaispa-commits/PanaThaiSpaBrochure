@@ -1,0 +1,619 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pana Thaï Spa - Brochure Interactive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Serene Sanctuary -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Nouveau Fond Noir */
+            background-color: #1A1A1A; 
+            /* Nouvelle Couleur de Texte Claire */
+            color: #F5F5F5;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .active-nav {
+            /* Or pour l'élément actif */
+            background-color: #D4AF37; 
+            /* Texte noir sur l'or */
+            color: #1A1A1A; 
+            font-weight: 600;
+        }
+        .nav-item {
+            transition: all 0.3s ease;
+        }
+        .nav-item:hover {
+            /* Gris très foncé pour le survol */
+            background-color: #2E2E2E; 
+        }
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            /* Ombre ajustée pour le fond sombre */
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.2); 
+        }
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #444444; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #1A1A1A; 
+        }
+    </style>
+</head>
+<body>
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Barre latérale : Fond noir plus foncé pour la navigation -->
+        <aside class="w-full lg:w-64 bg-[#0D0D0D] p-4 lg:p-8 shrink-0">
+            <header class="text-center lg:text-left mb-8">
+                <!-- Titre en Or -->
+                <h1 class="font-serif text-3xl font-semibold text-[#D4AF37]">Pana Thaï Spa</h1>
+                <!-- Texte de description clair -->
+                <p class="text-sm text-gray-400 mt-1">L'Art du Bien-être</p>
+            </header>
+            <!-- Bouton pour revenir à la page d'accueil / Consultant -->
+            <nav id="spa-nav" class="flex lg:flex-col flex-wrap justify-center gap-2">
+                <a href="#" id="home-nav-link" class="nav-item block w-full text-left p-3 rounded-md text-[#E0E0E0] active-nav">Accueil / Consultant ✨</a>
+            </nav>
+            <nav id="services-nav" class="flex lg:flex-col flex-wrap justify-center gap-2 mt-4">
+                <!-- Liens de catégories ajoutés par JS -->
+            </nav>
+
+            <!-- Sélecteur de Langue -->
+            <div class="mt-8 pt-4 border-t border-[#2E2E2E]">
+                <label for="language-selector" class="block text-sm font-medium text-gray-400 mb-2">Traduire la Brochure:</label>
+                <select id="language-selector" class="w-full p-2 rounded-md bg-[#292929] border border-[#444444] text-[#F5F5F5] focus:ring-[#D4AF37] focus:border-[#D4AF37]">
+                    <option value="fr" selected>Français</option>
+                    <option value="en">English (Anglais)</option>
+                    <option value="es">Español (Espagnol)</option>
+                </select>
+                <button id="translate-btn" class="mt-3 w-full bg-[#D4AF37] text-[#1A1A1A] font-semibold py-2 rounded-lg hover:bg-yellow-400 transition duration-300 disabled:opacity-50">
+                    Traduire
+                </button>
+            </div>
+        </aside>
+
+        <main id="spa-content" class="flex-1 p-4 sm:p-6 lg:p-12">
+            <!-- La section d'accueil regroupe la description, le bouton et le consultant Gemini -->
+            <section id="welcome" class="space-y-12">
+                
+                <!-- Bloc Description et Réservation -->
+                <div class="mb-12">
+                    <!-- Titre en Or -->
+                    <h2 class="font-serif text-4xl text-[#D4AF37] mb-4">Bienvenue au Pana Thaï Spa</h2>
+                    <!-- Texte de description clair -->
+                    <p class="text-lg leading-relaxed text-gray-300 mb-8">
+                        Un havre de paix où le bien-être et la tradition se rencontrent. Inspiré des rituels ancestraux thaïlandais, notre spa est un sanctuaire dédié à la relaxation profonde, à la revitalisation du corps et à l'harmonie de l'esprit. Explorez nos soins et laissez-vous transporter dans un voyage sensoriel unique.
+                    </p>
+                    <!-- Bouton d'appel à l'action vers le site web -->
+                    <a href="https://www.panathaispa.com/" target="_blank" class="inline-block bg-[#D4AF37] text-[#1A1A1A] font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-yellow-400 transition duration-300 transform hover:scale-[1.02]">
+                        Réserver un massage ou offrir un bon cadeau
+                    </a>
+                </div>
+
+                <!-- Section Consultant Spa alimentée par Gemini (maintenant intégrée) -->
+                <div id="gemini-consultant" class="bg-[#292929] p-6 sm:p-8 rounded-lg shadow-lg border border-[#444444]">
+                    <h3 class="font-serif text-2xl font-semibold text-[#D4AF37] mb-4 flex items-center">
+                        Consultant Spa Personnalisé ✨
+                    </h3>
+                    <p class="text-gray-400 mb-4 text-sm">Décrivez votre état actuel (tensions musculaires, besoin de lâcher-prise, peau fatiguée...) et obtenez une recommandation de soin idéale parmi notre carte.</p>
+                    
+                    <div class="space-y-4">
+                        <textarea id="consultant-input" rows="3" placeholder="Ex: J'ai des douleurs aux épaules et je suis très stressé en ce moment. Je cherche une détente profonde." 
+                            class="w-full p-3 bg-[#1A1A1A] text-white border border-[#444444] rounded-lg focus:ring-[#D4AF37] focus:border-[#D4AF37] placeholder-gray-500"></textarea>
+                        
+                        <button id="recommendation-btn" 
+                            class="w-full bg-[#D4AF37] text-[#1A1A1A] font-semibold py-3 rounded-lg hover:bg-yellow-400 transition duration-300 disabled:opacity-50 flex items-center justify-center">
+                            <span id="btn-text">Trouver mon soin idéal ✨</span>
+                            <svg id="loading-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-[#1A1A1A] hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Zone de résultat de la recommandation -->
+                    <div id="recommendation-output" class="mt-6 p-4 bg-[#1A1A1A] rounded-lg border border-[#444444] hidden">
+                        <h4 class="font-serif text-xl text-white mb-2">Notre Recommandation :</h4>
+                        <div id="output-text" class="text-gray-300"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Conteneur des services (Vide par défaut, rempli lors de la navigation) -->
+            <div id="services-container" class="space-y-12">
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // --- Gemini API Configuration ---
+        const apiKey = "";
+        const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent";
+
+        // Fonction utilitaire pour l'attente avec un délai
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        // Fonction pour l'appel API avec Backoff Exponentiel
+        async function exponentialBackoffFetch(url, options, maxRetries = 5) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) {
+                        return response;
+                    } else if (response.status === 429 && i < maxRetries - 1) {
+                        // Gère l'erreur de limitation de débit (429 Too Many Requests)
+                        const waitTime = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                        await delay(waitTime);
+                    } else {
+                        // Gère les autres erreurs HTTP
+                        const errorBody = await response.json();
+                        console.error('API Error:', errorBody);
+                        throw new Error(`Erreur HTTP: ${response.status} - ${response.statusText}`);
+                    }
+                } catch (error) {
+                    if (i === maxRetries - 1) {
+                        console.error("Échec de l'appel API après plusieurs tentatives:", error);
+                        throw new Error("Impossible de contacter le service de recommandation. Veuillez réessayer plus tard.");
+                    }
+                    const waitTime = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                    await delay(waitTime);
+                }
+            }
+        }
+        
+        // --- Application Data & Logic ---
+
+        // NOTE: Tous les prix ont été augmentés de 5 € suite à la demande de l'utilisateur.
+        // Data in French is the original source (spaServices)
+        const spaServices = {
+            // 1. Massages Express et Réflexologie
+            massages_cibles: { 
+                name: "Massages Express et Réflexologie",
+                description: "Des soins courts et précis pour une détente immédiate ou un soulagement ciblé sur des zones spécifiques du corps, notamment la réflexologie plantaire.",
+                items: [
+                    { name: "Massage Express (30 min)", description: "Une pause bien-être ciblée pour dénouer les tensions rapidement.", prices: [ { service: "Dos", price: "45 €" }, { service: "Épaule-Tête", price: "45 €" }, { service: "Pieds", price: "40 €" } ] },
+                    { name: "Massage Pieds", description: "Basé sur les principes de la réflexologie plantaire pour détendre l'ensemble du corps.", prices: [ { duration: "1h00", solo: "75 €" }, { duration: "1h30", solo: "105 €" } ] }
+                ]
+            },
+            // 2. Massages Traditionnels (Massage Enfants ajouté ici)
+            massages_traditionnels: {
+                name: "Massages Traditionnels",
+                description: "Le cœur de l'expertise thaïlandaise, des techniques ancestrales pour libérer les tensions et harmoniser les énergies du corps. Ces massages sont réalisés aux huiles ou au sol.",
+                items: [
+                    { name: "Massage Thaï Traditionnel (Nuad Boran)", description: "Puissant et revitalisant, ce massage combine des pressions profondes sur les lignes d'énergie (Sen) et des étirements inspirés du yoga. Il se pratique au sol et permet de libérer les tensions, d'augmenter la souplesse et de régénérer le corps.", prices: [ { duration: "1h00", solo: "85 €", duo: "155 €" }, { duration: "1h30", solo: "115 €", duo: "225 €" }, { duration: "2h00", solo: "145 €", duo: "285 €" } ] },
+                    { name: "Massage Aroma Zen", description: "Ce massage thaï aux huiles aromatiques alterne mouvements fluides et pressions profondes pour une relaxation totale. Il combine tapotements et frictions sur les muscles les plus tendus.", prices: [ { duration: "1h00", solo: "95 €", duo: "175 €" }, { duration: "1h30", solo: "125 €", duo: "245 €" }, { duration: "2h00", solo: "155 €", duo: "305 €" } ] },
+                    { name: "Massage Deep Tissue", description: "Un massage aux huiles très profond et tonique, idéal pour dénouer les tensions musculaires chroniques.", prices: [ { duration: "1h00", solo: "100 €", duo: "185 €" }, { duration: "1h30", solo: "135 €", duo: "265 €" }, { duration: "2h00", solo: "165 €", duo: "-" } ] },
+                    { name: "Massage aux Huiles Chaudes", description: "Pratiqué avec des huiles chauffées et maintenues à température, ce massage apaise les sens, prévient de nombreux maux et apporte un réconfort profond.", prices: [ { duration: "1h00", solo: "105 €", duo: "195 €" }, { duration: "1h30", solo: "140 €", duo: "275 €" }, { duration: "2h00", solo: "175 €", duo: "345 €" } ] },
+                    // Massage pour enfants déplacé ici
+                    { name: "Massage Enfants (5 à 12 ans)", description: "Une initiation douce au bien-être pour aider les plus jeunes à se détendre.", prices: [ { duration: "30 min", solo: "45 €", duo: "-" } ] }
+                ]
+            },
+            // 3. Massages Spécialisés (Massage Enfants retiré d'ici)
+            massages_specialises: {
+                name: "Massages Spécialisés",
+                description: "Des expériences de massage uniques utilisant des accessoires (pierres, plantes) ou des protocoles spécifiques (4 mains, maternité).",
+                items: [
+                    { name: "Massage Thaï aux Plantes", description: "Application d'herbes chaudes (bergamote, gingembre, citronnelle...) sur tout le corps à l'aide de ballots chauffés à la vapeur. Idéalement combiné avec un Massage Thaï Traditionnel ou aux Huiles.", prices: [ { duration: "1h00", solo: "125 €" }, { duration: "1h30", solo: "155 €" } ] },
+                    { name: "Massage aux Pierres Chaudes", description: "Un massage prodigué avec des galets volcaniques chauffés, qui diffusent une chaleur apaisante pour une détente musculaire maximale.", prices: [ { duration: "1h00", solo: "125 €" }, { duration: "1h30", solo: "155 €" } ] },
+                    { name: "Massage à 4 Mains", description: "Réalisé par deux masseuses, ce massage aux huiles aromatiques alterne mouvements fluides et pressions profondes pour un lâcher-prise total et un rééquilibrage de votre énergie.", prices: [ { duration: "30 min", solo: "95 €" }, { duration: "1h00", solo: "175 €" } ] },
+                    { name: "Massage Femmes Enceintes (+ de 3 mois)", description: "Un soin doux et enveloppant pour soulager les tensions et accompagner la future maman.", prices: [ { duration: "1h00", solo: "95 €" }, { duration: "1h30", solo: "125 €" } ] }
+                ]
+            },
+            forfaits_rituels: {
+                name: "Forfaits & Rituels",
+                description: "Des expériences complètes conçues pour une évasion totale, combinant plusieurs soins pour un bien-être décuplé.",
+                items: [
+                    { name: "Forfait Pana Thaï", description: "Combine un massage des pieds (1h) et un massage au choix (Thaï Traditionnel ou aux Huiles), et un accès au hammam (30 min).", prices: [ { duration: "2h30", price: "155 € / personne" } ] },
+                    { name: "Forfait Jasmin", description: "Un mélange subtil de réflexologie (30 min) et d'un massage aux huiles aromatiques (1h). Idéal pour un moment de détente en amoureux ou entre amis.", prices: [ { duration: "1h30", price: "125 € / personne" } ] },
+                    { name: "Forfait Orchid", description: "Un combiné tonique de réflexologie des pieds (30 min) suivi d'un massage Thaï Traditionnel (1h).", prices: [ { duration: "1h30", price: "115 € / personne" } ] },
+                    { name: "Forfait Oriental", description: "Accès au hammam (30 min), gommage corps, et massage relaxant aux huiles (1h).", prices: [ { duration: "2h00", price: "155 € / personne" } ] },
+                    { name: "Forfait Quietude", description: "Un package bien-être total : massage des pieds (1h), massage Thaï Traditionnel (1h30), pause au hammam (30 min), puis massage aux huiles relaxant (1h).", prices: [ { duration: "4h00", price: "255 € / personne" } ] },
+                    { name: "Forfait Asian Paradise", description: "Un voyage de 4h : réflexologie ou massage des pieds (1h), massage Thaï Traditionnel (1h), hammam + gommage (1h) et massage aux huiles (1h).", prices: [ { duration: "4h00", price: "275 € / personne" } ] },
+                    { name: "Forfait Sensation Zen", description: "Réflexologie (30 min), massage Thaï Traditionnel (1h), pause hammam (30 min), et massage aux huiles (1h).", prices: [ { duration: "3h00", price: "205 € / personne" } ] },
+                    { name: "Forfait Harmony Zen", description: "Massage des pieds (1h), massage Thaï Traditionnel (1h), et massage aux huiles aromatiques (1h).", prices: [ { duration: "3h00", price: "235 € / personne" } ] }
+                ]
+            },
+            soins_visage: {
+                name: "Soins Visage",
+                description: "Révélez l'éclat de votre peau avec nos soins du visage experts, adaptés à chaque type de peau pour une beauté naturelle et durable.",
+                items: [
+                    { name: "Coup d'Éclat au Thé Vert", description: "Soin express pour retrouver la fraîcheur de la peau.", prices: [{ duration: "30 min", price: "55 € / personne"}] },
+                    { name: "Stratégie d'Hydratation", description: "Soin délicat pour les peaux fatiguées et stressées, pour une hydratation intense.", prices: [{ duration: "1h00", price: "95 € / personne"}] },
+                    { name: "Stratégie Pureté Éclat", description: "Nettoyage complet du visage pour une peau purifiée et éclatante.", prices: [{ duration: "1h00", price: "95 € / personne"}] },
+                    { name: "Soin Spécifique Homme", description: "Soin apaisant et purifiant, conçu pour les peaux malmenées par le rasage.", prices: [{ duration: "1h00", price: "95 € / personne"}] },
+                    { name: "Beauté Originelle", description: "Soin anti-âge luttant contre les rides et la perte d'élasticité, incluant un masque repulpant.", prices: [{ duration: "1h30", price: "125 € / personne"}] }
+                ]
+            },
+            formules_combinees: {
+                name: "Formules Combinées",
+                description: "L'alliance parfaite entre nos différents soins pour créer des expériences sur-mesure. Tous les prix sont par personne.",
+                items: [
+                    { name: "Harmonie Thaï", description: "Massage aux huiles (1h) et soin du visage (30 min).", prices: [ { duration: "1h30", price: "125 €" } ] },
+                    { name: "Infinity", description: "Massage des pieds (30 min) et soin du visage au choix (1h).", prices: [ { duration: "1h30", price: "115 €" } ] },
+                    { name: "Siam Serenity", description: "Hammam relaxant (30 min) et massage aux huiles aromatiques (1h).", prices: [ { duration: "1h30", price: "125 €" } ] },
+                    { name: "Pana Royal", description: "Réflexologie (30 min), massage aux huiles (1h) et soin du visage (30 min).", prices: [ { duration: "2h00", price: "165 €" } ] },
+                    { name: "Thaï Éclat", description: "Hammam / Gommage (1h) et soin du visage au choix (1h).", prices: [ { duration: "2h00", price: "155 €" } ] },
+                    { name: "Rituel Thémaé", description: "Massage aux huiles (1h) et soin du visage au choix (1h).", prices: [ { duration: "2h00", price: "155 €" } ] },
+                    { name: "Siam Sensation", description: "Hammam / Gommage (1h), massage aux huiles (1h), et soin du visage au choix (1h).", prices: [ { duration: "3h00", price: "245 €" } ] },
+                    { name: "Siam Royal", description: "Réflexologie (1h), hammam / gommage (1h), massage aux huiles (1h), et soin du visage au choix (1h).", prices: [ { duration: "4h00", price: "305 €" } ] },
+                ]
+            },
+             hammam: {
+                name: "Espace Hammam",
+                description: "Plongez dans un bain de vapeur purifiant pour détendre vos muscles, nettoyer votre peau et préparer votre corps aux soins.",
+                items: [
+                    // Le soin "Hammam Pana Thaï" a été supprimé
+                    { name: "Hammam + Gommage", description: "", prices: [ { duration: "1h00", price: "85 € / personne" } ] },
+                    { name: "Hammam Privé", description: "Pour 2 personnes", prices: [ { duration: "30 min", price: "45 € / personne" } ] }
+                ]
+            },
+        };
+        
+        // Variables globales pour gérer l'état
+        const originalSpaServices = JSON.parse(JSON.stringify(spaServices)); 
+        let currentSpaServices = originalSpaServices; 
+        let currentLanguage = 'fr';
+
+        const navContainer = document.getElementById('spa-nav');
+        const servicesNavContainer = document.getElementById('services-nav');
+        const servicesContainer = document.getElementById('services-container');
+        const welcomeSection = document.getElementById('welcome');
+        const homeNavLink = document.getElementById('home-nav-link');
+        
+        const recommendationInput = document.getElementById('consultant-input');
+        const recommendationBtn = document.getElementById('recommendation-btn');
+        const recommendationOutput = document.getElementById('recommendation-output');
+        const outputText = document.getElementById('output-text');
+        const btnText = document.getElementById('btn-text');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const languageSelector = document.getElementById('language-selector');
+        const translateBtn = document.getElementById('translate-btn');
+
+
+        // Fonction de traduction utilisant Gemini API
+        async function translateContent(targetLang) {
+            // Empêche de traduire si la langue est déjà sélectionnée
+            if (targetLang === currentLanguage) return;
+            
+            translateBtn.disabled = true;
+            translateBtn.textContent = 'Traduction en cours...';
+
+            // Revenir à la version française originale
+            if (targetLang === 'fr') {
+                currentSpaServices = originalSpaServices;
+                currentLanguage = 'fr';
+                setupNavigation(); 
+                renderHome();
+                translateBtn.textContent = 'Traduire';
+                translateBtn.disabled = false;
+                return;
+            }
+
+            try {
+                const spaCatalog = JSON.stringify(originalSpaServices, null, 2);
+                const languageMap = { 'en': 'English', 'es': 'Spanish' };
+                const targetLangName = languageMap[targetLang] || 'the requested language';
+
+                const systemPrompt = `
+                    You are a professional translator for a luxury spa brochure.
+                    Translate the entire provided JSON object, maintaining the structure, keys (like 'name', 'items', 'prices', 'duration', 'solo', 'duo', 'service'), and array order exactly.
+                    Only translate the VALUES of the fields: 'name', 'description', 'duration', 'service'. DO NOT translate values for 'solo', 'duo', or 'price' (these are numerical and unit values like '85 €').
+                    The translated output MUST be a valid JSON object identical in structure to the input.
+                `;
+
+                const userPrompt = `
+                    Translate the following spa services catalog JSON into ${targetLangName}. Preserve the exact JSON structure and keys. Only translate the text values.
+                    CATALOGUE: ${spaCatalog}
+                `;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userPrompt }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                    generationConfig: {
+                         responseMimeType: "application/json",
+                    }
+                };
+
+                const response = await exponentialBackoffFetch(`${apiUrl}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (jsonText) {
+                    const translatedData = JSON.parse(jsonText);
+                    currentSpaServices = translatedData;
+                    currentLanguage = targetLang;
+                } else {
+                    throw new Error("API did not return valid translation data.");
+                }
+
+            } catch (error) {
+                console.error("Translation error:", error);
+                alert(`Erreur de traduction : Impossible de traduire le contenu en ${targetLang}. Veuillez réessayer.`);
+                // Revert to original language selection if translation fails
+                languageSelector.value = currentLanguage; 
+            } finally {
+                // Re-render the UI with the new (or original) language data
+                setupNavigation(); 
+                renderHome();
+                translateBtn.textContent = 'Traduire';
+                translateBtn.disabled = false;
+            }
+        }
+
+
+        // Logique de recommandation (Consultant Spa)
+        async function generateRecommendation() {
+            const userQuery = recommendationInput.value.trim();
+
+            if (!userQuery) {
+                recommendationOutput.classList.add('hidden');
+                outputText.innerHTML = '';
+                return;
+            }
+
+            // Afficher le spinner et désactiver le bouton
+            recommendationBtn.disabled = true;
+            btnText.textContent = "Recherche en cours...";
+            loadingSpinner.classList.remove('hidden');
+            recommendationOutput.classList.add('hidden');
+            outputText.innerHTML = '';
+            
+            try {
+                // Utiliser le catalogue actuellement affiché (traduit ou français)
+                const spaCatalog = JSON.stringify(currentSpaServices, null, 2);
+
+                // Instructions pour la recommandation
+                const systemPrompt = `
+                    You are a consultant expert for the "Pana Thaï Spa". Your mission is to recommend the most suitable care for the user based on their request and the provided service catalog.
+                    The language of the response MUST match the current language of the catalog provided.
+                    The catalog is strict: you MUST recommend only an existing care or package from the catalog.
+                    Your response must be concise, friendly, and professional.
+                    STRICT response format: Start with the recommended care name in bold, followed by a single justification paragraph (max 3 sentences). Do not add any other information or salutations.
+                `;
+
+                const userPrompt = `
+                    My state/need is: "${userQuery}".
+                    Based on the following catalog (which is currently in ${currentLanguage}), what is the most relevant care for me?
+                    CATALOGUE: ${spaCatalog}
+                `;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userPrompt }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                };
+
+                const response = await exponentialBackoffFetch(`${apiUrl}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (text) {
+                    // Update output title based on current language
+                    const titleText = currentLanguage === 'fr' ? 'Notre Recommandation :' : (currentLanguage === 'en' ? 'Our Recommendation:' : 'Nuestra Recomendación:');
+                    document.querySelector('#recommendation-output h4').textContent = titleText;
+                    
+                    // The API response is processed to bold the care name
+                    outputText.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<span class="text-[#D4AF37] font-semibold text-lg">$1</span><br>');
+                    recommendationOutput.classList.remove('hidden');
+                } else {
+                    outputText.textContent = currentLanguage === 'fr' ? "Désolé, je n'ai pas pu générer de recommandation pour l'instant. Veuillez reformuler votre demande." : "Sorry, I couldn't generate a recommendation right now. Please rephrase your request.";
+                    recommendationOutput.classList.remove('hidden');
+                }
+
+            } catch (error) {
+                console.error("Erreur de recommandation:", error);
+                outputText.textContent = currentLanguage === 'fr' ? "Une erreur est survenue lors de la communication avec le consultant. Veuillez vérifier votre connexion ou réessayer." : "An error occurred while communicating with the consultant. Please check your connection or try again.";
+                recommendationOutput.classList.remove('hidden');
+            } finally {
+                // Rétablir le bouton et masquer le spinner
+                recommendationBtn.disabled = false;
+                btnText.textContent = currentLanguage === 'fr' ? "Trouver mon soin idéal ✨" : (currentLanguage === 'en' ? "Find my ideal care ✨" : "Encontrar mi cuidado ideal ✨");
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+
+
+        // Affiche la page d'accueil (Consultant et Description)
+        function renderHome() {
+            // 1. Mettre à jour les textes statiques de l'Accueil/Consultant
+            const titles = {
+                fr: ["Bienvenue au Pana Thaï Spa", "Consultant Spa Personnalisé ✨", "Décrivez votre état actuel (tensions musculaires, besoin de lâcher-prise, peau fatiguée...) et obtenez une recommandation de soin idéale parmi notre carte.", "Réserver un massage ou offrir un bon cadeau", "Ex: J'ai des douleurs aux épaules et je suis très stressé en ce moment. Je cherche une détente profonde.", "Trouver mon soin idéal ✨", "Notre Recommandation :"],
+                en: ["Welcome to Pana Thaï Spa", "Personalized Spa Consultant ✨", "Describe your current state (muscle tension, need for relaxation, tired skin...) and get an ideal care recommendation from our menu.", "Book a massage or offer a gift voucher", "Ex: I have shoulder pain and I'm very stressed right now. I'm looking for deep relaxation.", "Find my ideal care ✨", "Our Recommendation:"],
+                es: ["Bienvenido a Pana Thaï Spa", "Consultor de Spa Personalizado ✨", "Describa su estado actual (tensión muscular, necesidad de relajación, piel cansada...) y obtenga una recomendación de cuidado ideal de nuestro menú.", "Reservar un masaje u ofrecer un bono regalo", "Ej: Tengo dolor de hombro y estoy muy estresado ahora mismo. Busco una relajación profunda.", "Encontrar mi cuidado ideal ✨", "Nuestra Recomendación:"]
+            };
+            const currentTitles = titles[currentLanguage] || titles['fr'];
+
+            document.querySelector('#welcome h2').textContent = currentTitles[0];
+            document.querySelector('#welcome .text-lg').innerHTML = currentLanguage === 'fr' 
+                ? "Un havre de paix où le bien-être et la tradition se rencontrent. Inspiré des rituels ancestraux thaïlandais, notre spa est un sanctuaire dédié à la relaxation profonde, à la revitalisation du corps et à l'harmonie de l'esprit. Explorez nos soins et laissez-vous transporter dans un voyage sensoriel unique."
+                : (currentLanguage === 'en' 
+                    ? "A haven of peace where wellness and tradition meet. Inspired by ancestral Thai rituals, our spa is a sanctuary dedicated to deep relaxation, body revitalization, and harmony of the mind. Explore our treatments and let yourself be transported on a unique sensory journey."
+                    : "Un remanso de paz donde el bienestar y la tradición se encuentran. Inspirado en los rituales ancestrales tailandeses, nuestro spa es un santuario dedicado a la relajación profunda, la revitalización del cuerpo y la armonía del espíritu. Explore nuestros tratamientos y déjese transportar en un viaje sensorial único.");
+
+            document.querySelector('#gemini-consultant h3').textContent = currentTitles[1];
+            document.querySelector('#gemini-consultant p.text-gray-400').textContent = currentTitles[2];
+            document.querySelector('#welcome a.inline-block').textContent = currentTitles[3];
+            document.getElementById('consultant-input').placeholder = currentTitles[4];
+            btnText.textContent = currentTitles[5];
+            document.querySelector('#recommendation-output h4').textContent = currentTitles[6];
+            
+            // 2. Mettre à jour l'état de navigation
+            document.querySelectorAll('#services-nav a').forEach(link => link.classList.remove('active-nav'));
+            homeNavLink.classList.add('active-nav');
+            homeNavLink.textContent = currentLanguage === 'fr' ? "Accueil / Consultant ✨" : (currentLanguage === 'en' ? "Home / Consultant ✨" : "Inicio / Consultor ✨");
+
+
+            // 3. Afficher la page d'accueil
+            welcomeSection.style.display = 'block';
+            servicesContainer.innerHTML = '';
+            
+            // Masquer le résultat du consultant si un nouvel affichage est fait
+            recommendationOutput.classList.add('hidden');
+        }
+
+        // Fonctions de rendu des services
+        function renderServices(categoryKey) {
+            const category = currentSpaServices[categoryKey];
+            if (!category) return;
+            
+            // Masquer la page d'accueil
+            welcomeSection.style.display = 'none';
+            servicesContainer.innerHTML = '';
+
+            // Mettre à jour l'état de navigation
+            document.querySelectorAll('#services-nav a').forEach(link => link.classList.remove('active-nav'));
+            document.querySelector(`a[data-category="${categoryKey}"]`).classList.add('active-nav');
+            homeNavLink.classList.remove('active-nav');
+
+
+            const categoryHeader = document.createElement('div');
+            categoryHeader.innerHTML = `
+                <!-- Titres de catégorie en Or -->
+                <h2 class="font-serif text-3xl md:text-4xl text-[#D4AF37] mb-2">${category.name}</h2>
+                <!-- Description en Gris Clair -->
+                <p class="text-base text-gray-400 max-w-3xl">${category.description}</p>
+            `;
+            servicesContainer.appendChild(categoryHeader);
+
+            const itemsGrid = document.createElement('div');
+            itemsGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8';
+            
+            category.items.forEach(item => {
+                let priceHtml = '';
+                const firstPriceItem = item.prices[0];
+
+                // Logic to determine table headers language
+                const durationText = currentLanguage === 'fr' ? 'Durée' : (currentLanguage === 'en' ? 'Duration' : 'Duración');
+                const soloText = currentLanguage === 'fr' ? 'Solo' : 'Solo';
+                const duoText = currentLanguage === 'fr' ? 'Duo' : 'Duo';
+                const serviceText = currentLanguage === 'fr' ? 'Service' : (currentLanguage === 'en' ? 'Service' : 'Servicio');
+
+
+                if (firstPriceItem.solo !== undefined) { 
+                    priceHtml = `
+                        <table class="w-full text-sm mt-4 text-left">
+                            <thead class="border-b border-[#444444]">
+                                <tr>
+                                    <th class="py-2 pr-2 font-medium text-gray-400">${durationText}</th>
+                                    <th class="py-2 px-2 font-medium text-gray-400">${soloText}</th>
+                                    ${firstPriceItem.duo ? `<th class="py-2 pl-2 font-medium text-gray-400">${duoText}</th>` : ''}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${item.prices.map(p => `
+                                    <tr class="border-b border-[#2E2E2E]">
+                                        <td class="py-2 pr-2">${p.duration}</td>
+                                        <td class="py-2 px-2">${p.solo}</td>
+                                        ${p.duo ? `<td class="py-2 pl-2">${p.duo || '-'}</td>` : ''}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>`;
+                } else if (firstPriceItem.service !== undefined) {
+                     priceHtml = `
+                        <div class="mt-4 space-y-2">
+                             ${item.prices.map(p => `
+                                <div class="flex justify-between items-center text-sm border-b border-[#2E2E2E] py-2">
+                                    <span>${p.service}</span>
+                                    <span class="font-semibold text-[#D4AF37]">${p.price}</span>
+                                </div>
+                            `).join('')}
+                        </div>`;
+                } else {
+                     priceHtml = `
+                        <div class="mt-4 space-y-2">
+                            ${item.prices.map(p => `
+                                <div class="flex justify-between items-center text-sm border-b border-[#2E2E2E] py-2">
+                                    <span>${p.duration}</span>
+                                    <span class="font-semibold text-[#D4AF37]">${p.price}</span>
+                                </div>
+                            `).join('')}
+                        </div>`;
+                }
+
+
+                const itemCard = document.createElement('div');
+                // Carte de service sur fond gris foncé avec bordure subtile
+                itemCard.className = 'service-card bg-[#292929] rounded-lg shadow-sm border border-[#444444] p-6 flex flex-col';
+                itemCard.innerHTML = `
+                    <!-- Titre de la carte en Blanc -->
+                    <h3 class="font-serif text-xl font-medium text-white">${item.name}</h3>
+                    <!-- Description en Gris -->
+                    ${item.description ? `<p class="text-gray-400 mt-2 text-sm flex-grow">${item.description}</p>` : ''}
+                    ${priceHtml}
+                `;
+                itemsGrid.appendChild(itemCard);
+            });
+            servicesContainer.appendChild(itemsGrid);
+        }
+
+        // Fonction de configuration de la navigation
+        function setupNavigation() {
+            // Nettoyer la navigation des services avant de la reconstruire
+            servicesNavContainer.innerHTML = '';
+            
+            // Ajouter les liens de services en utilisant la variable globale currentSpaServices
+            Object.keys(currentSpaServices).forEach((key) => {
+                const category = currentSpaServices[key];
+                const navLink = document.createElement('a');
+                navLink.href = '#';
+                navLink.textContent = category.name;
+                navLink.dataset.category = key;
+                // Texte de navigation en Gris Clair
+                navLink.className = 'nav-item block w-full text-left p-3 rounded-md text-[#E0E0E0]';
+                
+                navLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderServices(key);
+                });
+
+                servicesNavContainer.appendChild(navLink);
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavigation();
+            renderHome();
+
+            // Événements pour la traduction
+            translateBtn.addEventListener('click', () => {
+                const targetLang = languageSelector.value;
+                translateContent(targetLang);
+            });
+            
+            // Événements pour la recommandation
+            recommendationBtn.addEventListener('click', generateRecommendation);
+
+            // Événement pour l'accueil
+            homeNavLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderHome();
+            });
+        });
+    </script>
+</body>
+</html>
